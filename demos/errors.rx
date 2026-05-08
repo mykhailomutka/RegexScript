@@ -1,0 +1,9 @@
+# Error demo (run each one separately if it stops on first error)
+
+println(x);                 # undefined variable
+
+let xs = [1,2];
+println(xs[5]);             # index out of bounds
+
+let bad = /abc;             # bad regex literal (unterminated)
+println(bad);

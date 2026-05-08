@@ -1,0 +1,79 @@
+# RegexScript Example Project: Log Report
+# Usage:
+#   regexscript run log_report.rx path/to/logfile
+
+fn incCount(map, key) do
+  if map[key] == null do
+    map[key] = 1;
+  else do
+    map[key] = map[key] + 1;
+  end
+end
+
+fn main() do
+  let argv = args();
+  if len(argv) == 0 do
+    println("Usage: regexscript run log_report.rx <logfile>");
+    return;
+  end
+
+  let path = argv[0];
+  let text = readFile(path);
+
+  let lines = split(text, /\n/);
+  var total = len(lines);
+  var errors = 0;
+  var warns = 0;
+
+  var userCounts = {};
+  var ips = {};
+  var emails = [];
+
+  for line in lines do
+    if line =~ /^ERROR/ do
+      errors = errors + 1;
+    end
+    if line =~ /^WARN/ do
+      warns = warns + 1;
+    end
+
+    let ug = extract(line, /user=([A-Za-z0-9_]+)/);
+    if len(ug) > 0 do
+      let user = ug[1];
+      incCount(userCounts, user);
+    end
+
+    let ig = extract(line, /ip=([0-9]+\.[0-9]+\.[0-9]+\.[0-9]+)/);
+    if len(ig) > 0 do
+      let ip = ig[1];
+      ips[ip] = 1;
+    end
+  end
+
+  emails = findAll(text, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
+
+  println("==== RegexScript Log Report ====");
+  println("Total lines: " + "" + total);
+  println("WARN lines: " + "" + warns);
+  println("ERROR lines: " + "" + errors);
+  println("");
+
+  println("Users:");
+  for k in keys(userCounts) do
+    println("  " + k + ": " + "" + userCounts[k]);
+  end
+
+  println("");
+  println("Unique IPs:");
+  for ip in keys(ips) do
+    println("  " + ip);
+  end
+
+  println("");
+  println("Emails found:");
+  for e in emails do
+    println("  " + e);
+  end
+end
+
+main();

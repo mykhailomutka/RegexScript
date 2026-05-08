@@ -1,0 +1,6 @@
+2026-03-29 10:21:00 INFO  user=misha action=login ip=10.0.0.1
+2026-03-29 10:22:11 WARN  user=misha action=retry ip=10.0.0.1
+2026-03-29 10:22:30 ERROR user=alex action=checkout ip=10.0.0.2 msg="payment failed"
+2026-03-29 10:23:10 INFO  user=alex action=logout ip=10.0.0.2
+2026-03-29 10:23:20 ERROR user=misha action=checkout ip=10.0.0.1 msg="card declined"
+support email: help@company.com

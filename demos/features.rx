@@ -1,0 +1,23 @@
+# Features demo
+
+let text = "error: code 404, email help@company.com";
+println(text);
+
+println(text =~ /\d+/);                 # true/false regex test
+println(findAll(text, /\d+/));          # ["404"]
+println(findAll(text, /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/)); # emails
+
+let cleaned = replace(text, /\d+/, "XXX");
+println(cleaned);
+
+let parts = split("a  b   c", /\s+/);
+println(parts);
+println(len(parts));
+
+let m = {"food": 2, "rent": 1};
+println(keys(m));
+
+fn add(a, b) do
+  return a + b;
+end
+println(add(2, 3));

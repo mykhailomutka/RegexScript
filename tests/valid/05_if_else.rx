@@ -1,0 +1,1 @@
+let s = "abc123"; if s =~ /\d+/ do println("yes"); else do println("no"); end
