@@ -1,4 +1,4 @@
-# RegexScript (Full Project)
+# RegexScript
 This repo includes a full RegexScript implementation:
 1) Lexer
 2) Parser (AST)
