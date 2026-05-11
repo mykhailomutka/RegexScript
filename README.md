@@ -1,32 +1,19 @@
 # RegexScript
-This repo includes a full RegexScript implementation:
-1) Lexer
-2) Parser (AST)
-3) Interpreter (runs programs)
-4) CLI: lex / parse / run
-5) Tests
-6) Example project script
+
+RegexScript is a small **regex-first scripting language** implemented in Java. It’s designed for text processing and pattern matching, with a simple end-to-end toolchain:
+
+**Source file → Lexer → Tokens → Parser → AST → Interpreter → Output**
+
+This repo contains a full working build, including:
+1) **Lexer** (tokenizes source code)
+2) **Parser** (builds an AST with correct precedence/associativity)
+3) **Interpreter** (executes programs)
+4) **CLI commands**: `lex`, `parse`, `run`
+5) **Tests** (valid scripts that parse, invalid scripts that fail)
+6) **Example project script** (a log report demo that uses regex + text utilities)
 
 ## Compile
-1) mkdir out
 
-2) Compile
-
-Windows (PowerShell):
-  javac -d out (Get-ChildItem -Recurse src -Filter *.java | % { $_.FullName })
-
-macOS/Linux:
-  javac -d out $(find src -name "*.java")
-
-## CLI
-1) Lex
-  java -cp out regexscript.Main lex examples/log_report/log_report.rx
-
-2) Parse
-  java -cp out regexscript.Main parse examples/log_report/log_report.rx
-
-3) Run (example project)
-  java -cp out regexscript.Main run examples/log_report/log_report.rx examples/log_report/sample.log
-
-## Run tests
-  java -cp out regexscript.TestRunner
+1) Create output folder:
+```bash
+mkdir out
